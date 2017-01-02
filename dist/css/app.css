@@ -7,13 +7,15 @@ body {
 
 button, .button {
   box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.25);
+  display: inline-block;
   padding: 0.5em 1em 0.5em 1em;
   color: #ffffff;
   background: #7770bb;
   border: 0;
-  text-transform: uppercase;
   margin: 0 0.5em 0.5em 0;
+  text-decoration: none;
   font-weight: bold;
+  box-sizing: border-box;
 }
 
 .important {
@@ -29,19 +31,25 @@ button, .button {
   text-align: right;
 }
 
+.footer {
+  margin-top: 2em;
+}
+
 select {
   max-width: 230px;
 }
 
 input[type=submit], input[type=button] {
   box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.25);
+  display: inline-block;
   padding: 0.5em 1em 0.5em 1em;
   color: #ffffff;
   background: #7770bb;
   border: 0;
-  text-transform: uppercase;
   margin: 0 0.5em 0.5em 0;
+  text-decoration: none;
   font-weight: bold;
+  box-sizing: border-box;
 }
 
 table {
@@ -70,4 +78,40 @@ table {
 
 .drug-filter--result-item-green {
   color: #00aa00;
+}
+
+.nav {
+  padding: 0;
+  margin: 0 0 1em 0;
+  list-style: none inside;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav + .nav {
+  border-top: solid 0.15em #7770bb;
+  padding-top: 1em;
+}
+
+.nav li {
+  display: block;
+  flex-grow: 1;
+  margin-bottom: 0.5em;
+  padding: 0 0.25em 0 0.25em;
+}
+
+.nav li a {
+  width: 100%;
+  box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  padding: 0.5em 1em 0.5em 1em;
+  color: #ffffff;
+  background: #7770bb;
+  border: 0;
+  margin: 0 0.5em 0.5em 0;
+  text-decoration: none;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin: 0;
+  text-align: center;
 }
