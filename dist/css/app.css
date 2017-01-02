@@ -73,6 +73,10 @@ table tr {
   word-wrap: break-word;
 }
 
+table th, table td {
+  font-size: inherit;
+}
+
 .drug-filter--filter input[type=text] {
   width: 100%;
   font-weight: bold;

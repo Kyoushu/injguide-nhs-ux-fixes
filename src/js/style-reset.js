@@ -165,6 +165,11 @@ app.styleReset = (function(){
         });
     }
 
+    function stripRedundantElements()
+    {
+        $('input[name=searchstr]').closest('table').remove();
+    }
+
     return function()
     {
         fixViewport();
@@ -172,6 +177,7 @@ app.styleReset = (function(){
         stripStyleAttributes();
         stripEventAttributes();
         stripLinkNonBreakingSpaces();
+        stripRedundantElements();
         replaceFontElements();
         stripEmptyElements();
         stripScriptElements();
