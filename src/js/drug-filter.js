@@ -36,39 +36,20 @@ app.drugFilter = (function(){
 
             })();
 
-            var filterInput = $('<input>', {'type': 'text'});
+            var filterInput = $('<input>', {'type': 'text', 'placeholder': 'Filter'});
 
             container.append(
-                $('<div>', {'placeholder': 'Filter'}).addClass('drug-filter--filter').append(filterInput)
+                $('<div>').addClass('drug-filter--filter').append(filterInput)
             );
 
             var resultContainer = $('<div>').addClass('drug-filter--result');
             container.append(resultContainer);
 
-            function renderResult(max)
+            function renderList()
             {
-                if(typeof max === 'undefined') max = 50;
-
-                var filterText = filterInput.val();
-                var filterRegex = null;
-
-                if(filterText){
-                    var filterTextQuoted = filterText.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&");
-                    filterRegex = new RegExp(filterTextQuoted, 'gi');
-                }
-
                 resultContainer.empty();
 
-                var count = 0;
                 $.each(drugList, function(index, drug){
-
-                    if(count > max) return false;
-
-                    if(filterRegex){
-                        if(!drug.label.match(filterRegex)) return;
-                    }
-
-                    count++;
 
                     var url = '/IVGuideDisplay.asp?Drugno=' + drug.id + '&MonographType=Adult';
 
@@ -79,14 +60,43 @@ app.drugFilter = (function(){
 
                     resultContainer.append(link);
                 });
+            }
+
+            function filterList()
+            {
+
+                var filterText = filterInput.val();
+                var filterRegex = null;
+
+                if(filterText){
+                    var filterTextQuoted = filterText.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&");
+                    filterRegex = new RegExp(filterTextQuoted, 'gi');
+                }
+
+                resultContainer.find('.drug-filter--result-item').each(function(){
+                    var link = $(this);
+                    var label = link.html();
+                    if(filterRegex){
+                        link.css('display', (label.match(filterRegex) ? 'block' : 'none'));
+                        return;
+                    }
+                    link.css('display', 'block');
+                });
 
             }
 
-            renderResult();
+            renderList();
 
-            filterInput.on('keypress change paste keydown', function(){
-                renderResult();
-            });
+            (function(){
+                var lastValue = null;
+                filterInput.on('keypress change paste keydown keyup', function(e){
+                    var value = filterInput.val();
+                    if(value !== lastValue){
+                        filterList();
+                    }
+                    lastValue = value;
+                });
+            })();
 
         });
 

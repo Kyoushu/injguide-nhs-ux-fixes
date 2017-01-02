@@ -1,0 +1,18 @@
+@import "../settings";
+
+@mixin shadow()
+{
+    box-shadow: 0 0.25em 0.25em rgba(0,0,0,0.25);
+}
+
+@mixin button()
+{
+    @include shadow();
+    padding: ($gutter / 2) $gutter ($gutter / 2) $gutter;
+    color: $white;
+    background: $primary;
+    border: 0;
+    text-transform: uppercase;
+    margin: 0 ($gutter / 2) ($gutter / 2) 0;
+    font-weight: bold;
+}

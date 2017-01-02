@@ -1,29 +1,66 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 body {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1em;
+  margin: 1em;
+}
+
+button, .button {
+  box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.25);
+  padding: 0.5em 1em 0.5em 1em;
+  color: #ffffff;
+  background: #7770bb;
+  border: 0;
+  text-transform: uppercase;
+  margin: 0 0.5em 0.5em 0;
+  font-weight: bold;
+}
+
+.important {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 select {
   max-width: 230px;
 }
 
+input[type=submit], input[type=button] {
+  box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.25);
+  padding: 0.5em 1em 0.5em 1em;
+  color: #ffffff;
+  background: #7770bb;
+  border: 0;
+  text-transform: uppercase;
+  margin: 0 0.5em 0.5em 0;
+  font-weight: bold;
+}
+
 table {
-  max-width: 100%;
+  width: 100%;
 }
 
 .drug-filter--filter input {
   width: 100%;
-  padding: 0.375em;
+  padding: 0.5em;
 }
 
 .drug-filter--result {
-  margin-top: 1.5em;
+  margin-top: 2em;
 }
 
 .drug-filter--result-item {
   display: block;
-  padding: 0.375em;
-  margin-top: 0.375em;
+  padding: 0.5em;
+  margin-top: 0.5em;
   background: #eeeeee;
 }
 

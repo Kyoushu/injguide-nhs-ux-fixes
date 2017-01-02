@@ -1,4 +1,5 @@
 @import "../settings";
+@import "mixins";
 
 form{
 
@@ -6,4 +7,8 @@ form{
 
 select{
     max-width: 230px;
+}
+
+input[type=submit], input[type=button]{
+    @include button();
 }

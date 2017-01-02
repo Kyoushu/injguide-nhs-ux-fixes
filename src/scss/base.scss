@@ -1,6 +1,25 @@
 @import "settings";
+@import "partial/mixins";
 
 body{
     font-family: $base-font-family;
     font-size: $base-font-size;
+    margin: $gutter;
+}
+
+button, .button{
+    @include button();
+}
+
+.important{
+    color: $red;
+    font-weight: bold;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-right{
+    text-align: right;
 }
