@@ -27,3 +27,10 @@ button, .button{
 .footer{
     margin-top: $gutter * 2;
 }
+
+ol{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 23rem;
+}

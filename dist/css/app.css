@@ -35,6 +35,13 @@ button, .button {
   margin-top: 2em;
 }
 
+ol {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 23rem;
+}
+
 input[type=text] {
   padding: 0.5em;
   font-size: 1em;
@@ -61,8 +68,14 @@ table {
   width: 100%;
 }
 
+table tr {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
 .drug-filter--filter input[type=text] {
   width: 100%;
+  font-weight: bold;
 }
 
 .drug-filter--result {
