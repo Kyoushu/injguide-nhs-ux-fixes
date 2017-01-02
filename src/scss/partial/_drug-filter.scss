@@ -1,0 +1,34 @@
+@import "../settings";
+
+.drug-filter{
+
+    &--filter{
+
+        input{
+            width: 100%;
+            padding: $gutter / 2;
+        }
+
+    }
+
+    &--result{
+        margin-top: $gutter * 2;
+    }
+
+    &--result-item{
+        display: block;
+        padding: $gutter / 2;
+        margin-top: $gutter / 2;
+        background: $panel-background;
+
+        &-blue{
+            color: $blue;
+        }
+
+        &-green{
+            color: $green;
+        }
+
+    }
+
+}

@@ -10219,8 +10219,178 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-var app = (function(){
+if(typeof app === 'undefined') var app = {};
 
+app.init = function(){
 
+    app.drugFilter.init();
+
+    app.styleReset();
+
+};
+
+$(function(){
+    app.init();
+});
+if(typeof app === 'undefined') var app = {};
+
+app.drugFilter = (function(){
+
+    function init()
+    {
+
+        $('select[name="Drugno"]').each(function(){
+
+            var drugSelect = $(this);
+
+            var drugList = [];
+            var container = $('<div>').addClass('drug-filter');
+
+            // Get data, remove old elements, and insert new container
+            (function(){
+                drugList = (function(){
+                    var list = [];
+                    drugSelect.find('option').each(function(){
+                        var option = $(this);
+
+                        var colorMatch = option.attr('style').match(/color:(.+)/);
+
+                        list.push({
+                            'id': option.attr('value'),
+                            'label': option.text().trim(),
+                            'color': (colorMatch ? colorMatch[1] : null)
+                        });
+                    });
+                    return list;
+                })();
+                var parentTable =  drugSelect.closest('table');
+                parentTable.prev('table').remove();
+                parentTable.after(container);
+                parentTable.remove();
+
+            })();
+
+            var filterInput = $('<input>', {'type': 'text'});
+
+            container.append(
+                $('<div>', {'placeholder': 'Filter'}).addClass('drug-filter--filter').append(filterInput)
+            );
+
+            var resultContainer = $('<div>').addClass('drug-filter--result');
+            container.append(resultContainer);
+
+            function renderResult(max)
+            {
+                if(typeof max === 'undefined') max = 50;
+
+                var filterText = filterInput.val();
+                var filterRegex = null;
+
+                if(filterText){
+                    var filterTextQuoted = filterText.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&");
+                    filterRegex = new RegExp(filterTextQuoted, 'gi');
+                }
+
+                resultContainer.empty();
+
+                var count = 0;
+                $.each(drugList, function(index, drug){
+
+                    if(count > max) return false;
+
+                    if(filterRegex){
+                        if(!drug.label.match(filterRegex)) return;
+                    }
+
+                    count++;
+
+                    var url = '/IVGuideDisplay.asp?Drugno=' + drug.id + '&MonographType=Adult';
+
+                    var link = $('<a>', {'href': url})
+                        .addClass('drug-filter--result-item')
+                        .addClass('drug-filter--result-item-' + drug.color)
+                        .text(drug.label);
+
+                    resultContainer.append(link);
+                });
+
+            }
+
+            renderResult();
+
+            filterInput.on('keypress change paste keydown', function(){
+                renderResult();
+            });
+
+        });
+
+    }
+
+    return {
+        'init': init
+    }
+
+})();
+if(typeof app === 'undefined') var app = {};
+
+app.styleReset = (function(){
+
+    function fixViewport()
+    {
+        $('head').append(
+            $('<meta>', {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1.0'
+            })
+        );
+    }
+
+    function stripInlineStyles()
+    {
+        $('*').removeAttr('style').removeAttr('bgcolor');
+    }
+
+    function stripLinkNonBreakingSpaces()
+    {
+        $('a').each(function(){
+            var link = $(this);
+            var html = link.html();
+            html = html.replace(/&nbsp;/g, '');
+            link.html(html);
+        });
+    }
+
+    function replaceFontElements()
+    {
+        $('font').each(function(){
+            var fontElement = $(this);
+            var html = fontElement.html();
+            fontElement.replaceWith(
+                $('<span>').html(html)
+            );
+        });
+    }
+
+    function stripLegacyStyleElements()
+    {
+        $('#idMedusaImage1').remove();
+        $('#idMedusaImage').remove();
+
+        $('img[src$="images/curve.gif"]').remove();
+        $('img[src$="images/hidden.gif"]').remove();
+        $('img[src$="images/medusa.gif"]').remove();
+        $('img[src$="images/head_h.jpg"]').remove();
+        $('img[src$="images/head_sml.jpg"]').remove();
+        $('img[src$="images/head_bg.gif"]').remove();
+    }
+
+    return function()
+    {
+        fixViewport();
+        stripInlineStyles();
+        stripLegacyStyleElements();
+        stripLinkNonBreakingSpaces();
+        replaceFontElements();
+    }
 
 })();
