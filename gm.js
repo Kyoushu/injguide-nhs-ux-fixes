@@ -11,13 +11,13 @@
     if(window.location.href.match(/\.pdf/i)) return;
 
     var script = document.createElement('script');
-    script.src = 'https://rawgit.com/Kyoushu/injguide-nhs-ux-fixes/master/dist/js/app.min.js?_' + (new Date());
+    script.src = 'https://rawgit.com/Kyoushu/injguide-nhs-ux-fixes/0f17a62cd057ad1b0eb25a560ec6ad8bf7afd901/dist/js/app.min.js';
     document.body.appendChild(script);
 
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
     styles.type = 'text/css';
-    styles.href = 'https://rawgit.com/Kyoushu/injguide-nhs-ux-fixes/master/dist/css/app.min.css?_' + (new Date());
+    styles.href = 'https://rawgit.com/Kyoushu/injguide-nhs-ux-fixes/0f17a62cd057ad1b0eb25a560ec6ad8bf7afd901/dist/css/app.min.css';
     document.head.appendChild(styles);
 
 })();
