@@ -1,0 +1,6 @@
+{
+  "name": "injguide-nhs-ux-fixes",
+  "dependencies": {
+    "jquery": "~3.1.1"
+  }
+}
