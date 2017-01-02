@@ -1,12 +1,12 @@
 @import "../settings";
+@import "mixins";
 
 .drug-filter{
 
     &--filter{
 
-        input{
+        input[type=text]{
             width: 100%;
-            padding: $gutter / 2;
         }
 
     }
@@ -16,17 +16,36 @@
     }
 
     &--result-item{
-        display: block;
-        padding: $gutter / 2;
-        margin-top: $gutter / 2;
-        background: $panel-background;
 
-        &-blue{
-            color: $blue;
+        display: block;
+        padding: ($gutter / 2) ($gutter / 2) ($gutter / 2) 2em;
+        margin-top: $gutter / 2;
+        background: $light-grey;
+        color: inherit;
+        text-decoration: none;
+
+        position: relative;
+
+        &:before{
+            content: '';
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            position: absolute;
+            top: $gutter / 2;
+            left: $gutter / 2;
         }
 
-        &-green{
-            color: $green;
+        &-black:before{
+            background: $black;
+        }
+
+        &-blue:before{
+            background: $blue;
+        }
+
+        &-green:before{
+            background: $green;
         }
 
     }

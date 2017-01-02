@@ -36,7 +36,7 @@ app.drugFilter = (function(){
 
             })();
 
-            var filterInput = $('<input>', {'type': 'text', 'placeholder': 'Filter'});
+            var filterInput = $('<input>', {'type': 'text', 'placeholder': 'Filter list'});
 
             container.append(
                 $('<div>').addClass('drug-filter--filter').append(filterInput)

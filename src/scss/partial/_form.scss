@@ -5,6 +5,11 @@ form{
 
 }
 
+input[type=text]{
+    padding: $gutter / 2;
+    font-size: 1em;
+}
+
 select{
     max-width: 230px;
 }
