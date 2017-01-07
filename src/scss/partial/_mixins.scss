@@ -7,6 +7,7 @@
 
 @mixin button()
 {
+    border-radius: 0.1rem;
     @include shadow();
     display: inline-block;
     padding: ($gutter / 2) $gutter ($gutter / 2) $gutter;
@@ -16,5 +17,6 @@
     margin: 0 ($gutter / 2) ($gutter / 2) 0;
     text-decoration: none;
     font-weight: bold;
+    font-size: inherit;
     box-sizing: border-box;
 }

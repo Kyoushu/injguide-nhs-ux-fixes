@@ -10285,7 +10285,7 @@ app.drugFilter = (function(){
 
                 $.each(drugList, function(index, drug){
 
-                    var url = '/IVGuideDisplay.asp?Drugno=' + drug.id + '&MonographType=Adult';
+                    var url = '/IVGuideDisplay.asp?Drugno=' + drug.id;
 
                     var link = $('<a>', {'href': url})
                         .addClass('drug-filter--result-item')
@@ -10355,13 +10355,14 @@ app.styleReset = (function(){
         );
     }
 
-    function stripLinkNonBreakingSpaces()
+    function stripNonBreakingSpaces()
     {
-        $('a').each(function(){
-            var link = $(this);
-            var html = link.html();
+        $('a,td').each(function(){
+            var element = $(this);
+            var html = element.html();
+            if(!html.match(/&nbsp;/)) return;
             html = html.replace(/&nbsp;/g, '');
-            link.html(html);
+            element.html(html);
         });
     }
 
@@ -10400,11 +10401,11 @@ app.styleReset = (function(){
 
         var links = {
             'header': [
+                {'icon': 'sign-out', 'title': 'Logout', 'url': '/Logout.asp', 'confirm_message': 'Are you sure you want to log out?'},
                 {'title': 'Home', 'url': '/'},
                 {'title': 'Introduction', 'url': '/HomeIntro.asp'},
                 {'title': 'Recently Published', 'url': '/HomeRecentMonographs.asp'},
-                {'title': 'About This Site', 'url': '/HomeAbout.asp'},
-                {'title': 'Logout', 'url': '/Logout.asp'}
+                {'title': 'About This Site', 'url': '/HomeAbout.asp'}
             ],
             'footer': [
                 {'title': 'Terms and Conditions', 'url': '/docs/Terms%20and%20Conditions%20for%20access%20to%20IMG%20Website.doc'},
@@ -10428,9 +10429,21 @@ app.styleReset = (function(){
             var list = $('<ul>').addClass('nav');
 
             $.each(links[name], function(index, link){
+
+                var linkElement = $('<a>', {'href': link.url}).text(link.title);
+                if(link.icon){
+                    linkElement.prepend(' ').prepend( $('<i>').addClass('fa fa-' + link.icon) );
+                }
+
+                if(link.confirm_message){
+                    linkElement.on('click', function(e){
+                        if(!confirm(link.confirm_message)) e.preventDefault();
+                    });
+                }
+
                 list.append(
                     $('<li>').append(
-                        $('<a>', {'href': link.url}).text(link.title)
+                        linkElement
                     )
                 );
             });
@@ -10464,11 +10477,15 @@ app.styleReset = (function(){
 
     function stripEmptyElements()
     {
-        $('div,tr').each(function(){
-            var element = $(this);
-            if(element.html().trim() === ''){
-                element.remove();
-            }
+        var selectors = ['div','tr'];
+
+        $.each(selectors, function(index, selector){
+            $(selector).each(function(){
+                var element = $(this);
+                if(element.html().replace(/&nbsp;/g, '').trim() === ''){
+                    element.remove();
+                }
+            });
         });
     }
 
@@ -10519,7 +10536,7 @@ app.styleReset = (function(){
         addElementClasses();
         stripStyleAttributes();
         stripEventAttributes();
-        stripLinkNonBreakingSpaces();
+        stripNonBreakingSpaces();
         stripRedundantElements();
         replaceFontElements();
         stripEmptyElements();

@@ -51,7 +51,7 @@ app.drugFilter = (function(){
 
                 $.each(drugList, function(index, drug){
 
-                    var url = '/IVGuideDisplay.asp?Drugno=' + drug.id + '&MonographType=Adult';
+                    var url = '/IVGuideDisplay.asp?Drugno=' + drug.id;
 
                     var link = $('<a>', {'href': url})
                         .addClass('drug-filter--result-item')

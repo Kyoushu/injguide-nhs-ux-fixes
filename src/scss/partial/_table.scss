@@ -3,10 +3,12 @@
 table{
 
     width: 100%;
+    font-size: inherit;
 
     tr{
         max-width: 100%;
         word-wrap: break-word;
+        font-size: inherit;
     }
 
     th,td{

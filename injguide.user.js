@@ -9,6 +9,7 @@
 (function(){
 
     if(window.location.href.match(/\.pdf/i)) return;
+    if(window.location.href.match(/IVGuidePrint\.asp/i)) return;
 
     var script = document.createElement('script');
     script.src = 'https://rawgit.com/Kyoushu/injguide-nhs-ux-fixes/master/dist/js/app.min.js?_' + (new Date).toISOString().slice(0,13);
